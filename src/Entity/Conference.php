@@ -22,7 +22,7 @@ class Conference
     private ?string $year = null;
 
     #[ORM\Column]
-    private ?bool $isIternational = null;
+    private ?bool $isInternational = null;
 
     /**
      * @var Collection<int, Comment>
@@ -64,14 +64,14 @@ class Conference
         return $this;
     }
 
-    public function isIternational(): ?bool
+    public function isInternational(): ?bool
     {
-        return $this->isIternational;
+        return $this->isInternational;
     }
 
-    public function setIternational(bool $isIternational): static
+    public function setIsInternational(bool $isInternational): static
     {
-        $this->isIternational = $isIternational;
+        $this->isInternational = $isInternational;
 
         return $this;
     }
@@ -104,5 +104,10 @@ class Conference
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->city . ' ' . $this->year;
     }
 }
