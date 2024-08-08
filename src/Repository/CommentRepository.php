@@ -32,4 +32,13 @@ class CommentRepository extends ServiceEntityRepository
 
         return new Paginator($query);
     }
+
+    public function add(Comment $comment, $flush = false)
+    {
+        $this->getEntityManager()->persist($comment);
+
+        if ($flush === true) {
+            $this->getEntityManager()->flush();
+        }
+    }
 }

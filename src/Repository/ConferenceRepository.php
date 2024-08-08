@@ -16,28 +16,17 @@ class ConferenceRepository extends ServiceEntityRepository
         parent::__construct($registry, Conference::class);
     }
 
-    //    /**
-    //     * @return Conference[] Returns an array of Conference objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findAll(): array
+    {
+        return $this->findBy([], ['year' => 'DESC', 'city' => 'ASC']);
+    }
 
-    //    public function findOneBySomeField($value): ?Conference
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function add(Conference $conference, bool $flush = false)
+    {
+        $this->getEntityManager()->persist($conference);
+
+        if ($flush === true) {
+            $this->getEntityManager()->flush();
+        }
+    }
 }
