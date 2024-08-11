@@ -14,7 +14,6 @@ class SpamChecker
         private HttpClientInterface $client,
         #[Autowire('%env(AKISMET_KEY)%')] string $akismetKey,
     ) {
-        dd($akismetKey);
         $this->endpoint = sprintf('https://%s.rest.akismet.com/1.1/comment-check', $akismetKey);
     }
 
@@ -46,6 +45,7 @@ class SpamChecker
         }
 
         $content = $response->getContent();
+
         if (isset($headers['x-akismet-debug-help'][0])) {
             throw new \RuntimeException(sprintf('Unable to check for spam: %s (%s).', $content, $headers['x-akismet-debug-help'][0]));
         }
