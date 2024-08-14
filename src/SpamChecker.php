@@ -24,6 +24,7 @@ class SpamChecker
      */
     public function getSpamScore(Comment $comment, array $context): int
     {
+        error_log('hamid');
         $response = $this->client->request('POST', $this->endpoint, [
             'body' => array_merge($context, [
                 'blog' => 'https://guestbook.example.com',
